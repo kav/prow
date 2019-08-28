@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 image:
-  repository: gcr.io/jenkinsxio/prow 
+  repository: gcr.io/jenkinsxio/prow
   tag: v20190826-3976f61
 
 deck:
@@ -119,9 +119,11 @@ crier:
   args:
     - -gerrit-workers=0
     - -github-workers=1
+    - -slack-workers=1
     - -logtostderr
     - -config-path=/etc/config/config.yaml
     - -github-token-path=/etc/github/oauth
+    - -slack-token-path=/etc/slack/slack-token
   resources:
     limits:
      cpu: 400m
@@ -165,7 +167,7 @@ hook:
   terminationGracePeriodSeconds: 180
   args:
     - --dry-run=false
-    - --plugin-help=false 
+    - --plugin-help=false
   resources:
     limits:
      cpu: 400m
@@ -304,4 +306,5 @@ tide:
       fabric8.io/ingress.annotations: "kubernetes.io/ingress.class: nginx\nnginx.ingress.kubernetes.io/auth-type: basic\nnginx.ingress.kubernetes.io/auth-secret: jx-basic-auth"
   datadog:
     enabled: "true"
+
 
